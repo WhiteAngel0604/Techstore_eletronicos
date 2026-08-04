@@ -15,5 +15,11 @@ Problema: O sistema usado atualmente pela empresa causa conflitos na estrutura i
 
 Solução Proposta: A integração de um software de desktop em java, utilizando a arquitetura Model-View-Controller, conectada a um banco de dados SQL.
 
-Escopo: 
+Escopo: O software irá gerenciar os registros feitos no sistema, como preços, histórico de vendas, cadastros e controle de clientes. Porém a aplicação não vai interferir na interface visual acessada pelo usuário.
+
+Regras de negócio: Um cliente não pode realizar uma compra sem estar cadastrado no sistema, 
+
+Requisitos Funcionais: 
+
+Requisitos Não-Funcionais:
 
