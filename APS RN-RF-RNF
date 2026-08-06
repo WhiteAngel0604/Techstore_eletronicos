@@ -1,0 +1,23 @@
+Regras de Negócio:
+1. Um produto só pode ser adicionado ao carrinho se a quantidade em estoque for maior que zero.
+2. A compra não pode ser executada se o pedido exigir uma quantidade maior que o que está disponível;
+3. Clientes menores de 18 anos não podem cadastrar o status "Pessoa Jurídica" (CNPJ).
+4. Cada movimentação de venda realizada deve atualizar imediatamente (dar baixa) na quantidade do estoque 
+correspondente no banco de dados.
+5. O pedido só pode ser finalizado se o endereço e os dados do cliente estiverem corretos;
+6. O pedido só pode ser realizado para clientes cadastrados no sistema.
+
+Requisitos Funcionais:
+1. O sistema deve realizar cadastros de produtos e usuários (PF e PJ);
+2. O sistema deve ter uma ferramenta de busca para consultar produtos (pré cadastrados) por nome ou código, 
+usuários (cadastrados) por nome, CPF/CNPJ ou email;
+3. O cliente pode consultar seus pedidos anteriores;
+4. O cliente pode selecionar mais de um produtos para o pedido;
+5. O sistema deve calcular o valor total do pedido e exibir ao usuário antes de efetuar a compra;
+6. O sistema deve gerar o histórico de vendas da loja;
+
+Requisitos Não-Funcionais:
+1. O software será desenvolvido na versão mais recente da linguagem java;
+2. O sistema deve salvar os dados registrados permanentemente no banco de dados;
+3. A interface gráfica deve ser intuitiva para o usuário;
+4. O resultado da busca não deve demorar mais que 2 segundos;
