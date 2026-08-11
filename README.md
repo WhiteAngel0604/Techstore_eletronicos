@@ -44,9 +44,5 @@ Escopo: O software irá gerenciar os registros feitos no sistema, como preços, 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Regras de negócio: Um cliente não pode realizar uma compra sem estar cadastrado no sistema, 
 
-Requisitos Funcionais: 
-
-Requisitos Não-Funcionais:
 
