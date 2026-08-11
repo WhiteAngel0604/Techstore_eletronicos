@@ -28,19 +28,25 @@ Objetivos especificos (corrigido): Ter um controle de estoque automatizado, evit
 
 Justificativa: O sistema precisa ser atualizado para melhor desempenho da loja.
 
-Justificativa (Corrigido): O atual sistema da loja se tornou ineficaz em relação às necessidades do estabelecimento e dos clientes. O controle manual não acompanha o ritmo de vendas, atrapalhando toda a dinamica de trabalho
+Justificativa (Corrigido): O atual sistema da loja se tornou ineficaz em relação às necessidades do estabelecimento e dos clientes. O controle manual não acompanha o ritmo das vendas, gerando retrabalho e dificultando o atendimento, tornando necessária uma atualização geral do sistema.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Problema: O sistema usado atualmente pela empresa causa conflitos na estrutura interna do estabelecimento, dificultando o acessos a informações essenciais para a rede, desencorajando a compra dos clientes.
 
+Problema (corrigido): O controle do sistema usado na empresa é registrado manualmente, através de planilhas e documentos. Os dados dos clientes e as informações não ficam em um local apropriado, aumentando as chances de perda de dados. Cada venda exige atenção e verificação manual, e o historico precisa de manutenção diaria, fazendo a equipe perder tempo com tarefas repetitivas. 
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Solução Proposta: A integração de um software de desktop em java, utilizando a arquitetura Model-View-Controller, conectada a um banco de dados SQL.
 
+Solução (corrigida): A solução proposta consiste no desenvolvimento de um software desktop em Java, utilizando a arquitetura MVC (Model-View-Controller) e banco de dados SQL. O sistema desenvolvido terá cadastro de clientes, cadastro de produtos, controle de estoque e registro de vendas, eliminando o controle manual e centralizando as informações da empresa.
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Escopo: O software irá gerenciar os registros feitos no sistema, como preços, histórico de vendas, cadastros e controle de clientes. Porém a aplicação não vai interferir na interface visual acessada pelo usuário.
+
+Escopo (corrigida): O sistema desktop será apenas para uso interno da empresa, focado na gestão de dados: cadastro de clientes e produtos, controle de estoque, registro de vendas e histórico de preços. Não inclui versão web, mobile ou integração com plataformas externas e redes sociais.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
