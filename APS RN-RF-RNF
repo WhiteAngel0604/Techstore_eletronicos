@@ -6,7 +6,7 @@ Regras de Negócio:
 correspondente no banco de dados;
 5. O pedido só pode ser finalizado se o endereço e os dados do cliente estiverem corretos;
 6. O pedido só pode ser realizado para clientes cadastrados no sistema.
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Requisitos Funcionais:
 1. O sistema deve realizar cadastros de produtos e usuários (PF e PJ);
 2. O sistema deve ter uma ferramenta de busca para consultar produtos (cadastrados) por nome ou código, 
@@ -15,7 +15,7 @@ usuários (cadastrados) por nome, CPF/CNPJ ou email;
 4. O cliente pode selecionar mais de um produtos para o pedido;
 5. O sistema deve calcular o valor total do pedido e exibir ao usuário antes de efetuar a compra;
 6. O sistema deve gerar o histórico de vendas da loja;
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Requisitos Não-Funcionais:
 1. O software será desenvolvido na versão mais recente da linguagem java;
 2. O sistema deve salvar os dados registrados automaticamente no banco de dados;
