@@ -68,6 +68,8 @@ public class Conexao {
         con_cliente.conecta();
         con_cliente.executaSQL("select * from tbclientes order by cod");
         preencherTabela();
+        posicionarRegistro();
+        tblClientes.setAutoCreateRowSorter(true);    //ativa a classificação ordenada da tabela
     } 
 
     // Método preencherTabela (AGORA FORA DO CONSTRUTOR)
@@ -93,11 +95,26 @@ public class Conexao {
             JOptionPane.showMessageDialog(null, "\n Erro ao listar dados da tabela!! :\n" + erro);
         }
     }
-public static void main(String args[]) {
+        public void posicionarRegistro() [
+        try {
+            con_cliente.resultset.first(); //posiciona no 1° registro da tabeça
+            mostrar_Dados();
+        }catch(SQLException erro){
+        JOptionPane.showMessageDialog(null,"Não foi possível posicionar no primeiro registro: "+erro,"Mensagem do Programa",JOptionPane.INFORMATION_MESSAGE);
 }
+
+public void mostrar_Dados(); {
+    try {
+        txtCod.setText(con_cliente.resultset.getString("cod")); //Associar a caixa de texto ao campo cod
+        txtNome.setText(con_cliente.resultset.getString("nome")); //Associar a caixa de texto ao campo nome
+        txtNasc.setText(con_cliente.resultset.getString("dt_nasc")); 
+        txtFone.setText(con_cliente.resultset.getString("telefone"));
+        txtEmail.setText(con_cliente.resultset.getString("email"));
+    }catch (SQLException erro){
+        JOptionPane.showMessageDialog(null,"Não localizou dados: "+erro,"Mensagem do Programa",JOptionPane.INFORMATION_MESSAGE);
+    }
+public static void main(String args[]) {
+    }
 } // <-- Esta chave fecha a classe frmTela por completo
-       
-    
-    
 }
 
