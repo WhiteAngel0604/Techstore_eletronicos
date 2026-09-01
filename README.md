@@ -76,7 +76,7 @@ Requisitos Não-Funcionais:
 1. O software será desenvolvido na versão mais recente da linguagem java;
 2. O sistema deve salvar os dados registrados automaticamente no banco de dados;
 3. A interface gráfica deve ser intuitiva para o usuário;
-4. O resultado da busca não deve demorar mais que 2 segundos;
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
