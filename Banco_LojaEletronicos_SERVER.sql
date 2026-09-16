@@ -12,13 +12,13 @@ GO -- Inicia
 
 -- CRIANDO O BANCO!!
 
-IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'loja') -- Aqui ele consulta o sistema para conferir se o banco ja existe antes de criar
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'Banco_LojaEletronicos_SERVER') -- Aqui ele consulta o sistema para conferir se o banco ja existe antes de criar
 BEGIN
-    CREATE DATABASE loja; -- Cria o banco
+    CREATE DATABASE Banco_LojaEletronicos_SERVER; -- Cria o banco
 END;
 GO 
 
-USE loja; -- Avisa ao sistema que os comandos a partir daqui pertencem ao banco loja
+USE Banco_LojaEletronicos_SERVER; -- Avisa ao sistema que os comandos a partir daqui pertencem ao banco loja
 GO
 
 BEGIN TRANSACTION; -- indica que o sistema so deve executar se tudo estiver certinho
