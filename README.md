@@ -1,6 +1,6 @@
 # Techstore_eletronicos
 um trabaio ai
-
+tamo escrevendo tamo escrevendo
 Coloquem o texto que precisarmos lê ai
 
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
