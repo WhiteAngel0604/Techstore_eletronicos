@@ -1,39 +1,40 @@
 -- BANCO DE DADOS LOJA DE ELETRONICO
 -- VERSÃO SQL SERVER!!!!
 
--- Desenvolvido por Larissa Dias, Alicia Fontes, Geovanna Novais e Felippi Angelo ( Yasmin revisava conteudo mandado pelo professor!!)
+-- Desenvolvido por Larissa Dias, Alicia Fontes, Geovanna Novais e Felippi Angelo
 
 
--- CONFIGURAÇÕES BASICAS!!
+-- CONFIGURAÇÕES BASICAS DO SQL SERVER!!
 
 SET ANSI_NULLS ON; -- Aqui é para não dar erro com variaveis NULL
 SET QUOTED_IDENTIFIER ON; -- Aqui é para identificar aspas
-GO -- Inicia 
+GO -- Inicia o bloco de comandos
 
 -- CRIANDO O BANCO!!
 
-IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'Banco_LojaEletronicos_SERVER') -- Aqui ele consulta o sistema para conferir se o banco ja existe antes de criar
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'Banco_LojaEletronico_SERVER') -- Aqui ele consulta o sistema para conferir se o banco ja existe antes de criar
 BEGIN
-    CREATE DATABASE Banco_LojaEletronicos_SERVER; -- Cria o banco
+    CREATE DATABASE Banco_LojaEletronico_SERVER; -- Cria o banco
 END;
 GO 
 
-USE Banco_LojaEletronicos_SERVER; -- Avisa ao sistema que os comandos a partir daqui pertencem ao banco loja
+USE Banco_LojaEletronico_SERVER; -- Avisa ao sistema que os comandos a partir daqui pertencem ao banco loja
 GO
 
-BEGIN TRANSACTION; -- indica que o sistema so deve executar se tudo estiver certinho
-
+BEGIN TRANSACTION; -- Indica que o sistema só deve salvar se tudo for executado sem erros
 -- INICIO DO CODIGO!!
 
--- Detalhes importantes: NOT NULL serve pára avisar ao sistema que tal informação não pode ser vazia PRECISA DE VALOR; Identify é basicamente o auto incremendo que tem no mysql, continua na debaixo
-	-- De inicio, não temos algumas configurações presentes no MySQL pois elas vem configuradas pelo sistema padrão aqui
+-- Detalhes importantes: 
+-- NOT NULL serve para avisar ao sistema que tal informação não pode ser vazia, PRECISA DE VALOR.
+-- IDENTITY(1,1) é o auto-incremento do SQL Server.
 
 CREATE TABLE Cliente -- Criando a tabela Cliente
 (
 	idCli int IDENTITY(1,1) NOT NULL PRIMARY KEY, -- Determinamos como Chave primaria. Adicionamos auto-incremento
 	nome varchar(255) NOT NULL,
-	email varchar(255) NOT NULL,
-	CPF varchar(11) NOT NULL -- Adicionar mascara no java
+	email varchar(255) NOT NULL UNIQUE,
+	CPF varchar(11) NOT NULL, -- Adicionar mascara no java
+	senha_hash varchar(60) NOT NULL -- a senha a gente precisa ajustar no java
 );
 
 CREATE TABLE telefone_Cliente -- Criando tabela telefone_Cliente, essa tabela existe pois o telefone é multivalorado e pode ter mais de um valor
@@ -47,13 +48,13 @@ CREATE TABLE telefone_Cliente -- Criando tabela telefone_Cliente, essa tabela ex
 
 CREATE TABLE endereco_cliente -- Criando tabela endereco_cliente, ela existe pois o endereço é um atributo composto, logo ele é feito por mais de uma informação
 (
-	id_endereco int IDENTITY(1,1) NOT NULL PRIMARY KEY, -- Chave primaria
+	id_endereco int IDENTITY(1,1) NOT NULL PRIMARY KEY, -- Chave primaria. Adicionamos auto-incremento
 	cep varchar(8) NOT NULL, 
 	bairro varchar(255) NOT NULL, 
 	logradouro varchar(255), -- sem NOT NULL pois não é uma informação obrigatoria
 	cidade varchar(255) NOT NULL, 
 	estado varchar(255) NOT NULL, 
-	numero varchar(10) NOT NULL,
+	numero varchar(10) NOT NULL, 
 	complemento varchar(255), -- sem NOT NULL pois não é uma informação obrigatoria
 
 	fk_cliente int NOT NULL,
@@ -63,13 +64,14 @@ CREATE TABLE endereco_cliente -- Criando tabela endereco_cliente, ela existe poi
 
 CREATE TABLE Funcionario -- Criando a tabela Funcionario
 (
-	idFun int IDENTITY(1,1) NOT NULL PRIMARY KEY,-- Chave primaria
+	idFun int IDENTITY(1,1) NOT NULL PRIMARY KEY, -- Chave primaria. Adicionamos auto-incremento
 	nome varchar(255) NOT NULL,
-	email varchar(255) NOT NULL,
+	email varchar(255) NOT NULL UNIQUE,
 	CPF varchar(11) NOT NULL, -- Adicionar mascara no java
-	CTPS varchar(12) NOT NULL, -- Adicionar mascara no java, eu acho
+	CTPS varchar(12) NOT NULL, -- Adicionar mascara no java
 	setor varchar(255) NOT NULL,
-	funcao varchar(255) NOT NULL
+	funcao varchar(255) NOT NULL,
+	senha_hash varchar(60) NOT NULL -- ajustar no java 
 );
 
 CREATE TABLE telefone_Funcionario -- Criando a tabela telefone_Funcionario
@@ -89,7 +91,7 @@ CREATE TABLE endereco_funcionario -- Criando a tabela endereco_funcionario
 	logradouro varchar(255), -- sem NOT NULL pois não é uma informação obrigatoria
 	cidade varchar(255) NOT NULL, 
 	estado varchar(255) NOT NULL, 
-	numero varchar(5) NOT NULL,
+	numero varchar(10) NOT NULL,
 	complemento varchar(255), -- sem NOT NULL pois não é uma informação obrigatoria
 
 	fk_funcionario int NOT NULL,
@@ -97,58 +99,57 @@ CREATE TABLE endereco_funcionario -- Criando a tabela endereco_funcionario
 );
 
 
-CREATE TABLE Fornecedor -- Criando a yabela Fornecedor
+CREATE TABLE Fornecedor -- Criando a tabela Fornecedor
 (
-	CNPJFornecedor bigint NOT NULL PRIMARY KEY, -- Chave primaria que o usuario deve fornecer. vigint pois o int não suporta 14 caracteres!
+	CNPJFornecedor varchar(14) NOT NULL PRIMARY KEY, -- Chave primaria que o usuario deve fornecer.
+	email varchar(255) NOT NULL UNIQUE,
 	nome varchar(255) NOT NULL,
-	dt_lote date NOT NULL -- So para especificar, aqui se refere a data de fabricação do lote
-
-	-- no programa vamos precisar fazer uma conexão entre o funcionario e o fornecedor, ja que não colocamos forma de contato aqui 
+	dt_lote date NOT NULL, -- data de compra do lote
+	senha_hash varchar(60) NOT NULL -- ajustar no java
 );
 
 CREATE TABLE endereco_fornecedor -- Criando a tabela endereco_fornecedor
 (
-	cep int NOT NULL PRIMARY KEY, -- Chave primaria
+	id_endereco int IDENTITY(1,1) NOT NULL PRIMARY KEY, -- Chave primaria. Adicionamos auto-incremento 
+	cep varchar(8) NOT NULL,
 	bairro varchar(255) NOT NULL, 
 	logradouro varchar(255), -- sem NOT NULL pois não é uma informação obrigatoria
 	cidade varchar(255) NOT NULL, 
 	estado varchar(255) NOT NULL, 
-	numero varchar(5) NOT NULL,
+	numero varchar(10) NOT NULL,
 	complemento varchar(255), -- sem NOT NULL pois não é uma informação obrigatoria
 
-	fk_fornecedor bigint NOT NULL, 
+	fk_fornecedor varchar(14) NOT NULL, 
 	FOREIGN KEY (fk_fornecedor) REFERENCES Fornecedor(CNPJFornecedor) -- Aqui dizemos que a variavel fk_fornecedor é uma chave estrangeira que referencia a tabela Fornecedor e a variavel CNPJFornecedor
 );
 
+CREATE TABLE Categoria -- Criando a tabela Categoria
+(
+	idCat int IDENTITY(1,1) NOT NULL PRIMARY KEY, -- Chave primaria. Adicionamos auto-incremento
+	tipo varchar(255) NOT NULL
+);
 
 CREATE TABLE Produtos -- Criando a tabela Produtos
 (
 	idPro int IDENTITY(1,1) NOT NULL PRIMARY KEY, -- Chave primaria. Adicionamos auto-incremento
 	nome varchar(255) NOT NULL,
-	preco decimal(10,2) NOT NULL, -- Decimal pois preços tem centavos 
+	preco decimal(10,2) NOT NULL, -- Decimal pois preços tem centavos né
 	estoque int NOT NULL,
 	marca varchar(255) NOT NULL,
 
-	fk_fornecedor bigint NOT NULL, 
-	FOREIGN KEY (fk_fornecedor) REFERENCES Fornecedor(CNPJFornecedor)  -- Aqui dizemos que a variavel fk_fornecedor é uma chave estrangeira que referencia a tabela Fornecedor e a variavel CNPJFornecedor
+	fk_fornecedor varchar(14) NOT NULL, 
+	FOREIGN KEY (fk_fornecedor) REFERENCES Fornecedor(CNPJFornecedor),  -- Aqui dizemos que a variavel fk_fornecedor é uma chave estrangeira que referencia a tabela Fornecedor e a variavel CNPJFornecedor
+
+	fk_categoria int NOT NULL,
+    FOREIGN KEY (fk_categoria) REFERENCES Categoria(idCat) -- aqui dizemos que a variavel fk_categoria é uma chave estrangeira que referencia a tabela Categoria e a variavel idCat
+
 );
-
-
-CREATE TABLE Categoria -- Criando a tabela Categoria
-(
-	idCat int IDENTITY(1,1) NOT NULL PRIMARY KEY, -- Chave primaria. Adicionamos auto-incremento
-	tipo varchar(255) NOT NULL,
-
-	fk_produtos int NOT NULL, 
-	FOREIGN KEY (fk_produtos) REFERENCES Produtos(idPro) -- Aqui dizemos que a variavel fk_produtos é uma chave estrangeira que se refere a tabela Produtos e a variavel idPro
-);
-
 
 CREATE TABLE Venda 
 (
 	idVenda int IDENTITY(1,1) NOT NULL PRIMARY KEY, -- Chave primaria. Adicionamos auto-incremento
 	valor decimal(10,2) NOT NULL, -- decimal pois preços tem centavos
-	dt_venda datetime NOT NULL, -- datetime pois é um campo especifico que pede o modelo 0000-00-00
+	dt_venda datetime NOT NULL, -- datetime porque né, dia/mes/ano 00.00.00
 
 	fk_cliente int NOT NULL, 
 	fk_funcionario int NOT NULL,
@@ -160,8 +161,10 @@ CREATE TABLE Venda
 CREATE TABLE itemVenda 
 (
 	idItem int IDENTITY(1,1) NOT NULL PRIMARY KEY, -- Chave primaria. Adicionamos auto-incremento
-	dt_item datetime NOT NULL, -- datetime pois é um campo especifico que pede o modelo 0000-00-00
+	dt_item datetime NOT NULL, -- datetime porque né, dia/mes/ano 00.00.00
 	status_venda varchar(200) NOT NULL,
+	quantidade int NOT NULL, -- MUDAR DER
+	valor_unid decimal(10,2) NOT NULL,
 
 	fk_venda int NOT NULL, 
 	fk_produtos int NOT NULL,
@@ -169,4 +172,14 @@ CREATE TABLE itemVenda
 	FOREIGN KEY (fk_produtos) REFERENCES Produtos(idPro) -- aqui dizemos que a variavel fk_produtos é uma chave estrangeira que se refere a tabela Produtos e a variavel idPro
 );
 
-COMMIT; -- guarda tudo na memoria
+INSERT INTO Cliente (nome, email, CPF, senha_hash) -- aqui a gente ta adicionando valores as tabelas
+VALUES ('Lalal Lala', 'aaaaaaaa@gmail.com', '66622988112', 1234);
+
+INSERT INTO telefone_Cliente (numero, fk_cliente) -- mesma coisa
+VALUES ('11 912345678', 1);
+
+SELECT * FROM Cliente; -- aqui a gente ta meio que mostrando esses valores, para funcionar é so fazer como se fosse copiar essa linha, clicar no direito do mouse e clicar em executar
+SELECT * FROM telefone_Cliente;
+
+
+COMMIT; -- Confirma a transação e grava de fato todas as tabelas na memória do SQL Server
